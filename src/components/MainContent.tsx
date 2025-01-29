@@ -258,52 +258,59 @@ const AdSection = ({ side }: { side: 'left' | 'right' }) => (
 );
 
 const CartComponent = () => (
-  <div className={`fixed top-0 right-0 h-full w-80 bg-white shadow-lg transform transition-transform duration-300 z-50 ${
-    isCartOpen ? 'translate-x-0' : 'translate-x-full'
-  }`}>
-    <div className="flex justify-between items-center p-4 border-b">
-      <h2 className="text-xl text-black font-semibold">Sepetim ({cart.length})</h2>
-      <button
-        onClick={() => setIsCartOpen(false)}
-        className="text-gray-500 hover:text-gray-700"
-      >
-        ✕
-      </button>
+  <div 
+    className={`fixed top-0 right-0 h-screen w-80 bg-white shadow-lg transform transition-transform duration-300 z-50 font-['Poppins'] ${
+      isCartOpen ? 'translate-x-0' : 'translate-x-full'
+    }`}
+  >
+    {/* Header */}
+    <div className="sticky top-0 bg-white p-4 border-b z-10">
+      <div className="flex justify-between items-center">
+        <h2 className="text-xl text-black font-semibold">Sepetim ({cart.length})</h2>
+        <button
+          onClick={() => setIsCartOpen(false)}
+          className="text-gray-500 hover:text-gray-700"
+        >
+          ✕
+        </button>
+      </div>
     </div>
 
-    <div className="flex-1 overflow-y-auto p-4">
+    {/* Cart Items - Scrollable Area */}
+    <div className="flex-1 overflow-y-auto h-[calc(100vh-140px)]"> {/* 140px = header height + footer height */}
       {cart.length === 0 ? (
         <div className="text-center text-gray-500 py-8">
           Sepetiniz boş
         </div>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-4 p-4">
           {cart.map(item => (
             <div key={item.id} className="flex items-center gap-3 border-b pb-4">
-              <Image
-                src={item.image}
-                alt={item.title}
-                width={50}
-                height={50}
-                className="object-contain"
-              />
-              <div className="flex-1">
-                <h4 className="text-sm text-black font-medium">{item.title}</h4>
+              <div className="w-[50px] h-[50px] relative">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  className="object-contain"
+                />
+              </div>
+              <div className="flex-1 min-w-0"> {/* min-w-0 prevents flex item from overflowing */}
+                <h4 className="text-sm text-black font-medium truncate">{item.title}</h4>
                 <p className="text-blue-600 font-semibold">
                   ${(item.price * (1 - item.discount / 100) * item.quantity).toFixed(2)}
                 </p>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 flex-shrink-0">
                 <button
                   onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                  className="px-2 py-1 bg-[#2563eb] text-white rounded hover:bg-gray-300"
+                  className="px-2 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
                 >
                   -
                 </button>
-                <span className="text-black">{item.quantity}</span>
+                <span className="text-black w-6 text-center">{item.quantity}</span>
                 <button
                   onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                  className="px-2 py-1 bg-[#2563eb] text-white rounded hover:bg-gray-300"
+                  className="px-2 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
                 >
                   +
                 </button>
@@ -320,12 +327,21 @@ const CartComponent = () => (
       )}
     </div>
 
-    <div className="border-t p-4 bg-white">
+    {/* Footer - Fixed at bottom */}
+    <div className="absolute bottom-0 left-0 right-0 bg-white border-t p-4">
       <div className="flex justify-between items-center mb-4">
         <span className="font-semibold text-black">Toplam:</span>
         <span className="font-semibold text-blue-600">${cartTotal.toFixed(2)}</span>
       </div>
-      <button className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors">
+      <button 
+        className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors"
+        onClick={() => {
+          // Sipariş tamamlama işlemleri buraya gelecek
+          alert('Sipariş tamamlandı!');
+          setCart([]);
+          setIsCartOpen(false);
+        }}
+      >
         Siparişi Tamamla
       </button>
     </div>

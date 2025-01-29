@@ -71,7 +71,7 @@ const Header: React.FC<Props> = ({ onSearch, onCategoryChange, onSort }) => {
   };
 
   return (
-    <header className="flex justify-between items-center bg-white px-[80px] py-[25px] shadow-[0_4px_6px_rgba(0,0,0,0.1)] rounded-[10px] w-[98%] border-b border-[#cce5ff] relative h-[100px] mx-auto mt-4 md:flex-row md:h-[100px] flex-col md:items-center items-start">
+    <header className="flex justify-between items-center bg-white px-[80px] py-[25px] shadow-[0_4px_6px_rgba(0,0,0,0.1)] rounded-[10px] w-[98%] border-b border-[#cce5ff] relative h-[100px] mx-auto mt-4 md:flex-row md:h-[100px] flex-col md:items-center items-start font-['Poppins']">
       <div className="flex items-center gap-2">
       <Image 
           src="https://previews.123rf.com/images/ikalvi/ikalvi1712/ikalvi171200242/92412982-smiling-shopping-cart-vector-logo-design-shopping-mart-or-app-vector-logo.jpg"
@@ -89,7 +89,7 @@ const Header: React.FC<Props> = ({ onSearch, onCategoryChange, onSort }) => {
         <div className="relative w-full md:w-auto">
           <input 
             type="text" 
-            className="w-full md:w-[250px] px-[15px] py-[10px] text-sm border border-gray-300 rounded-lg mr-2.5 transition-all duration-300 focus:border-blue-500 focus:shadow-[0_0_5px_rgba(0,123,255,0.5)] focus:outline-none md:mb-0 mb-2.5"
+            className="w-full md:w-[250px] text-black px-[15px] py-[10px] text-sm border border-gray-300 rounded-lg mr-2.5 transition-all duration-300 focus:border-blue-500 focus:shadow-[0_0_5px_rgba(0,123,255,0.5)] focus:outline-none md:mb-0 mb-2.5"
             placeholder="Ürün Ara"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -99,7 +99,7 @@ const Header: React.FC<Props> = ({ onSearch, onCategoryChange, onSort }) => {
 
         <button 
           onClick={handleSearch}
-          className="bg-blue-600 text-white border-none px-[15px] py-[10px] rounded-lg text-sm cursor-pointer ml-2.5 transition-all duration-300 hover:bg-blue-700 hover:scale-105 active:bg-blue-900 font-medium tracking-[0.3px] md:w-auto w-full md:mb-0 mb-2.5 mr-[150px]"
+          className="bg-blue-600 text-white border-none px-[15px] py-[10px] rounded-lg text-sm cursor-pointer ml-2.5 transition-all duration-300 hover:bg-blue-700 hover:scale-105 active:bg-blue-900 font-medium tracking-[0.3px] md:w-auto w-full md:mb-0 mb-2.5 mr-[210px]"
         >
           Ara
         </button>
